@@ -1,32 +1,32 @@
-class Task
-    attr_reader(:description, :list_id)
+class List
+    attr_reader(:name, :id)
 
     define_method(:initialize) do |attributes|
-      @description = attributes.fetch(:description)
-      @list_id = attributes.fetch(:list_id)
+      @name = attributes.fetch(:name)
+      @id = attributes.fetch(:id)
     end
 
     define_singleton_method(:all) do
-      returned_tasks = DB.exec("SELECT * FROM tasks;")
-      tasks = []
-      returned_tasks.each() do |task|
-        description = task.fetch("description")
-        list_id = task.fetch("list_id").to_i() # The information comes out of the database as a string.
-        tasks.push(Task.new({:description => description, :list_id => list_id}))
+      returned_lists = DB.exec("SELECT * FROM lists;")
+      lists = []
+      returned_lists.each() do |list|
+        name = list.fetch("name")
+        id = list.fetch("id").to_i()
+        lists.push(List.new({:name => name, :id => id}))
       end
-      tasks
+      lists
     end
 
     define_method(:save) do
-    DB.exec("INSERT INTO tasks (description, list_id) VALUES ('#{@description}', #{@list_id});")
+      result = DB.exec("INSERT INTO lists (name) VALUES ('#{@name}') RETURNING id;")
+      @id = result.first().fetch("id").to_i()
     end
 
-    define_method(:==) do |another_task|
-      self.description().==(another_task.description()).&(self.list_id().==(another_task.list_id()))
-    end
+    define_method(:==) do |another_list|
+      self.name().==(another_list.name()).&(self.id().==(another_list.id()))
     end
 
-  define_singleton_method(:find) do |id|
+    define_singleton_method(:find) do |id|
       found_list = nil
       List.all().each() do |list|
         if list.id().==(id)
@@ -36,7 +36,7 @@ class Task
       found_list
     end
 
-  define_method(:tasks) do
+    define_method(:tasks) do
       list_tasks = []
       tasks = DB.exec("SELECT * FROM tasks WHERE list_id = #{self.id()};")
       tasks.each() do |task|
@@ -46,3 +46,4 @@ class Task
       end
       list_tasks
     end
+  end

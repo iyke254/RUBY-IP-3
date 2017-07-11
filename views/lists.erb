@@ -1,19 +1,16 @@
-<h3>Add a task to <%= @list.name() %> </h3>
+<h1>Your Current Lists</h1>
 
-  <form action="/tasks" method="post">
-    <input id="list_id" name="list_id" type="hidden" value="<%= @list.id() %>">
+  <% if @lists.any?() %>
+    <h3>Here are your lists:</h3>
 
-    <label for="description">Description of the task:</label>
-    <input id="description" name="description" type="text">
+    <ul>
+      <% @lists.each() do |list| %>
+        <li><a href="/lists/<%= list.id()%>"><%= list.name() %></a> </li>
+      <% end %>
+    </ul>
 
-    <button type="submit">Add task</button>
-  </form>
+  <% else %>
 
-  <hr>
+      <p>There are no lists yet!</p>
 
-  <div class="container">
-    <a href="/">Home</a>
-    <a href="/lists">View All Lists</a>
-    <a href="/lists/new">Add New List</a>
-    <a href="/lists/new">Add New Task</a>
-  </div>
+  <% end %>

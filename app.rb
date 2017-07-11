@@ -1,7 +1,8 @@
-require("sinatra")
-  require("sinatra/reloader")
-  also_reload("lib/**/*.rb")
-  require("./lib/list")
+require('sinatra')
+  require('sinatra/reloader')
+  require('./lib/task')
+  require('./lib/list')
+  also_reload('lib/**/*.rb')
   require("pg")
 
   DB = PG.connect({:dbname => "to_do"})
@@ -21,9 +22,14 @@ require("sinatra")
     erb(:list_success)
    end
 
-  get('/lists') do
+   get('/lists') do
     @lists = List.all()
     erb(:lists)
+  end
+
+  get('/add') do
+    @lists = List.all()
+    erb(:description_form)
   end
 
   get("/lists/:id") do
