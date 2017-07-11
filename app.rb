@@ -45,7 +45,3 @@ require('sinatra')
     @task.save()
     erb(:task_success)
   end
-
-  get("/tasks") do
-    @tasks = Task.all()
-  end

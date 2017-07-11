@@ -1,19 +1,18 @@
 <h3>Tasks</h3>
-<% if @list.tasks().any?() %>
- <h3>Here are all the tasks in this list with their due dates:</h3>  <ol>
-   <% @list.tasks().each() do |task| %>
-     <li><%= task.description() %></li>
-   <% end %>
- </ol>
-<% else %>
+  <% if @list.tasks().any?() %>
+    <h3>Here are all the tasks in this list with their due dates:</h3>  <ol>
+      <% @list.tasks().each() do |task| %>
+        <li><%= task.description() %></li>
+      <% end %>
+    </ol>
+  <% else %>
  <p>There are no tasks yet!</p>
-<% end %><a href="/">Return to Main Page</a>
+ <% end %>
 
   <hr>
 
   <div class="container">
-    <a href="/">Home</a>
-    <a href="/lists">View All Lists</a>
-    <a href="/lists/new">Add New List</a>
-    <a href="/lists/new">Add New Task</a>
+    <a href="/"><button class="button btn">Return Home</button></a>
+    <a href="/lists"><button class="button btn">View All Lists</button></a>
+    <a href="/lists/new"><button class="button btn">Add New List without task</button></a>
   </div>
