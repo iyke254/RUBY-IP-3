@@ -1,13 +1,13 @@
-<h3>Add a task to <%= @list.name() %> </h3>
-
-  <form action="/tasks" method="post">
-    <input id="list_id" name="list_id" type="hidden" value="<%= @list.id() %>">
-
-    <label for="description">Description of the task:</label>
-    <input id="description" name="description" type="text">
-
-    <button type="submit">Add task</button>
-  </form>
+<h3>Tasks</h3>
+<% if @list.tasks().any?() %>
+ <h3>Here are all the tasks in this list with their due dates:</h3>  <ol>
+   <% @list.tasks().each() do |task| %>
+     <li><%= task.description() %></li>
+   <% end %>
+ </ol>
+<% else %>
+ <p>There are no tasks yet!</p>
+<% end %><a href="/">Return to Main Page</a>
 
   <hr>
 
