@@ -47,5 +47,5 @@ require('sinatra')
   end
 
   get("/tasks") do
-    "Loading....."
+    @tasks = Task.all()
   end

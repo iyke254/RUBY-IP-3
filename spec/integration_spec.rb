@@ -8,7 +8,7 @@ require('capybara/rspec')
       visit('/')
       click_link('Add New List')
       fill_in('name', :with =>'Moringaschool Work')
-      click_button('Add List')
+      click_button
       expect(page).to have_content('Success!')
     end
   end
