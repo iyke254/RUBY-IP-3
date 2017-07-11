@@ -55,12 +55,12 @@ require('sinatra')
     name = params.fetch("name")
     @list = List.find(params.fetch("id").to_i())
     @list.update({:name => name})
-    erb(:list)
+    erb(:list_success)
   end
 
   delete("/lists/:id") do
     @list = List.find(params.fetch("id").to_i())
     @list.delete()
     @lists = List.all()
-    erb(:index)
+    erb(:list_success)
   end
