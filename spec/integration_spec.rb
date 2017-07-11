@@ -5,8 +5,8 @@ require('capybara/rspec')
 
   describe('adding a new list', {:type => :feature}) do
     it('allows a user to click a list to see the tasks and details for it') do
-      visit('/')
-      click_button('Add New List')
+      visit('/lists/new')
+      # click_button('Add New List')
       fill_in('name', :with =>'Moringaschool Work')
       click_button('Add')
       expect(page).to have_content('Success!')
