@@ -8,6 +8,7 @@
     <ul>
       <% @lists.each() do |list| %>
         <li><a href="/lists/<%= list.id()%>"><%= list.name() %></a> </li>
+        <p><a href="/lists/<%= list.id() %>/edit"><button class="button btn"> Edit <%= list.name() %> list</button></a></p>
       <% end %>
     </ul>
 
