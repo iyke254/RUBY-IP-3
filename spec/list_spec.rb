@@ -14,21 +14,21 @@ require('rspec')
       it("adds a task to the array of saved tasks") do
         test_task = Task.new({:description => "learn SQL", :list_id => 1})
         test_task.save()
-        expect(Task.all()).to(eq([test_task]))
+        expect(Task.all()).==([test_task])
       end
     end
 
     describe("#description") do
       it("lets you read the description out") do
         test_task = Task.new({:description => "learn SQL", :list_id => 1})
-        expect(test_task.description()).to(eq("learn SQL"))
+        expect(test_task.description()).==("learn SQL")
       end
     end
 
     describe("#list_id") do
       it("lets you read the list ID out") do
         test_task = Task.new({:description => "learn SQL", :list_id => 1})
-        expect(test_task.list_id()).to(eq(1))
+        expect(test_task.list_id()).==(1)
       end
     end
 
@@ -36,7 +36,7 @@ require('rspec')
       it("is the same task if it has the same description and list ID") do
         task1 = Task.new({:description => "learn SQL", :list_id => 1})
         task2 = Task.new({:description => "learn SQL", :list_id => 1})
-        expect(task1).to(eq(task2))
+        expect(task1).==(task2)
       end
     end
   end
@@ -59,6 +59,6 @@ require('rspec')
         test_task.save()
         test_task2 = Task.new({:description => "Review Ruby", :list_id => test_list.id()})
         test_task2.save()
-        expect(test_list.tasks()).to(eq([test_task, test_task2]))
+        expect(test_list.tasks()).==([test_task, test_task2])
       end
     end

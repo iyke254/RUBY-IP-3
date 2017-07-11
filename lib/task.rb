@@ -20,18 +20,4 @@ class Task
     define_method(:save) do
     DB.exec("INSERT INTO tasks (description, list_id) VALUES ('#{@description}', #{@list_id});")
   end
-
-  define_singleton_method(:find) do |list_id|
-      found_task = nil
-      Task.all().each() do |task|
-        if task.list_id().==(list_id)
-          found_task = task
-        end
-      end
-      found_task
-    end
-
-    define_method(:==) do |another_task|
-      self.description().==(another_task.description()).&(self.list_id().==(another_task.list_id()))
-    end
-  end
+end

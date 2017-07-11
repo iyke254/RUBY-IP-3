@@ -20,9 +20,9 @@ require('sinatra')
     list = List.new({:name => name, :id => nil})
     list.save()
     erb(:list_success)
-   end
+  end
 
-   get('/lists') do
+  get('/lists') do
     @lists = List.all()
     erb(:lists)
   end
@@ -44,4 +44,9 @@ require('sinatra')
     @task = Task.new({:description => description, :list_id => list_id})
     @task.save()
     erb(:task_success)
+  end
+
+  get("/tasks") do
+    @tasks = Task.find(params.fetch("list_id").to_i())
+    erb(:tasks)
   end
