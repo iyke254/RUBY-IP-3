@@ -47,6 +47,5 @@ require('sinatra')
   end
 
   get("/tasks") do
-    @tasks = Task.find(params.fetch("list_id").to_i())
-    erb(:tasks)
+    "Loading....."
   end
