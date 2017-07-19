@@ -18,7 +18,7 @@ require('capybara/rspec')
       stylist = Stylist.new({:name => 'Moringaschool Homework', :id => nil})
       stylist.save()
       visit('/')
-      click_link('View All Lists')
+      click_link('View All Stylists')
       expect(page).to have_content(stylist.name)
     end
   end
