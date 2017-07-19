@@ -22,12 +22,12 @@ class Stylist
       @id = result.first().fetch("id").to_i()
     end
 
-    define_method(:==) do |another_list|
-      self.name().==(another_list.name()).&(self.id().==(another_list.id()))
+    define_method(:==) do |another_stylist|
+      self.name().==(another_stylist.name()).&(self.id().==(another_stylist.id()))
     end
 
     define_singleton_method(:find) do |id|
-      found_list = nil
+      found_stylist = nil
       Stylist.all().each() do |stylist|
         if stylist.id().==(id)
           found_list = stylist
