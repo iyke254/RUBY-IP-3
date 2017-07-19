@@ -9,9 +9,9 @@ class Client
     define_singleton_method(:all) do
       returned_clients = DB.exec("SELECT * FROM clients;")
       clients = []
-      returned_clients.each() do |task|
-        name = task.fetch("name")
-        stylist_id = task.fetch("stylist_id").to_i() # The information comes out of the database as a string.
+      returned_clients.each() do |client|
+        name = client.fetch("name")
+        stylist_id = client.fetch("stylist_id").to_i() # The information comes out of the database as a string.
         clients.push(Task.new({:name => name, :stylist_id => stylist_id}))
       end
       clients
