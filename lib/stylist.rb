@@ -36,15 +36,15 @@ class Stylist
       found_stylist
     end
 
-    define_method(:tasks) do
-      list_tasks = []
-      tasks = DB.exec("SELECT * FROM tasks WHERE stylist_id = #{self.id()};")
-      tasks.each() do |client|
+    define_method(:clients) do
+      stylist_clents = []
+      clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()};")
+      clients.each() do |client|
         name = client.fetch("name")
         stylist_id = client.fetch("stylist_id").to_i()
-        list_tasks.push(Task.new({:name => name, :stylist_id => stylist_id}))
+        stylist_clents.push(Task.new({:name => name, :stylist_id => stylist_id}))
       end
-      list_tasks
+      stylist_clents
     end
 
     define_method(:update) do |attributes|
@@ -55,6 +55,6 @@ class Stylist
 
     define_method(:delete) do
       DB.exec("DELETE FROM stylists WHERE id = #{self.id()};")
-      DB.exec("DELETE FROM tasks WHERE stylist_id = #{self.id()};")
+      DB.exec("DELETE FROM clients WHERE stylist_id = #{self.id()};")
     end
   end
