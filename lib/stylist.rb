@@ -12,7 +12,7 @@ class Stylist
       returned_stylists.each() do |stylist|
         name = stylist.fetch("name")
         id = stylist.fetch("id").to_i()
-        stylists.push(List.new({:name => name, :id => id}))
+        stylists.push(Stylist.new({:name => name, :id => id}))
       end
       stylists
     end
@@ -28,7 +28,7 @@ class Stylist
 
     define_singleton_method(:find) do |id|
       found_list = nil
-      List.all().each() do |stylist|
+      Stylist.all().each() do |stylist|
         if stylist.id().==(id)
           found_list = stylist
         end
