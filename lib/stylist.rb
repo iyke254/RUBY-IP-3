@@ -7,18 +7,18 @@ class Stylist
     end
 
     define_singleton_method(:all) do
-      returned_lists = DB.exec("SELECT * FROM lists;")
-      lists = []
-      returned_lists.each() do |list|
+      returned_stylists = DB.exec("SELECT * FROM stylists;")
+      stylists = []
+      returned_stylists.each() do |list|
         name = list.fetch("name")
         id = list.fetch("id").to_i()
-        lists.push(List.new({:name => name, :id => id}))
+        stylists.push(List.new({:name => name, :id => id}))
       end
-      lists
+      stylists
     end
 
     define_method(:save) do
-      result = DB.exec("INSERT INTO lists (name) VALUES ('#{@name}') RETURNING id;")
+      result = DB.exec("INSERT INTO stylists (name) VALUES ('#{@name}') RETURNING id;")
       @id = result.first().fetch("id").to_i()
     end
 
@@ -50,11 +50,11 @@ class Stylist
     define_method(:update) do |attributes|
       @name = attributes.fetch(:name)
       @id = self.id()
-      DB.exec("UPDATE lists SET name = '#{@name}' WHERE id = #{@id};")
+      DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id};")
     end
 
     define_method(:delete) do
-      DB.exec("DELETE FROM lists WHERE id = #{self.id()};")
+      DB.exec("DELETE FROM stylists WHERE id = #{self.id()};")
       DB.exec("DELETE FROM tasks WHERE list_id = #{self.id()};")
     end
   end
