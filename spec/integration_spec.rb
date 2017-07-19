@@ -4,7 +4,7 @@ require('capybara/rspec')
   set(:show_exceptions, false)
 
   describe('adding a new stylist', {:type => :feature}) do
-    it('allows a user to click a stylist to see the tasks and details for it') do
+    it('allows a user to click a stylist to see the clients and details for it') do
       visit('/stylists/new')
       # click_button('Add New List')
       fill_in('name', :with =>'Moringaschool Work')
@@ -24,7 +24,7 @@ require('capybara/rspec')
   end
 
   describe('seeing details for a single stylist', {:type => :feature}) do
-    it('allows a user to click a stylist to see the tasks and details for it') do
+    it('allows a user to click a stylist to see the clients and details for it') do
       test_list = List.new({:name => 'School stuff', :id => nil})
       test_list.save()
       test_task = Task.new({:description => "learn SQL", :list_id => test_list.id()})
@@ -35,7 +35,7 @@ require('capybara/rspec')
     end
   end
 
-  describe('adding tasks to a stylist', {:type => :feature}) do
+  describe('adding clients to a stylist', {:type => :feature}) do
     it('allows a user to add a task to a stylist') do
       test_list = List.new({:name => 'School stuff', :id => nil})
       test_list.save()
