@@ -1,17 +1,17 @@
-<h1>Choose A List and add its description</h1>
+<h1>Choose A Stylist and add her Clients</h1>
 
-  <form action="/tasks" method="post">
-    <label for="list_id">Select a List</label>
-    <select id='list_id' name='list_id' type='text'>
-      <% @lists.each() do |list| %>
-        <option value="<%= list.id()%>"> <%= list.name() %> </option>
+  <form action="/clients" method="post">
+    <label for="stylist_id">Select a Stylist</label>
+    <select id='stylist_id' name='stylist_id' type='text'>
+      <% @stylists.each() do |stylist| %>
+        <option value="<%= stylist.id()%>"> <%= stylist.name() %> </option>
       <% end %>
     </select>
 
-    <label for="description">Description of the task:</label>
-    <input id="description" name="description" type="text">
+    <label for="name">Name of the client:</label>
+    <input id="name" name="name" type="text">
 
-    <button type="submit">Add task</button>
+    <button type="submit">Add a client</button>
   </form>
 
   <hr>

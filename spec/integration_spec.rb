@@ -6,7 +6,7 @@ require('capybara/rspec')
   describe('adding a new stylist', {:type => :feature}) do
     it('allows a user to click a stylist to see the clients and details for it') do
       visit('/stylists/new')
-      # click_button('Add New Stylist')
+      click_button('Add New Stylist')
       fill_in('name', :with =>'Moringaschool Work')
       click_button('Add')
       expect(page).to have_content('Success!')
@@ -25,23 +25,23 @@ require('capybara/rspec')
 
   describe('seeing details for a single stylist', {:type => :feature}) do
     it('allows a user to click a stylist to see the clients and details for it') do
-      test_list = Stylist.new({:name => 'School stuff', :id => nil})
-      test_list.save()
-      test_task = Task.new({:description => "learn SQL", :list_id => test_list.id()})
-      test_task.save()
+      test_stylist = Stylist.new({:name => 'School stuff', :id => nil})
+      test_stylist.save()
+      test_client = Client.new({:name => "learn SQL", :stylist_id => test_stylist.id()})
+      test_client.save()
       visit('/stylists')
-      click_link(test_list.name())
-      expect(page).to have_content(test_task.description())
+      click_link(test_stylist.name())
+      expect(page).to have_content(test_client.name())
     end
   end
 
   describe('adding clients to a stylist', {:type => :feature}) do
-    it('allows a user to add a task to a stylist') do
-      test_list = Stylist.new({:name => 'School stuff', :id => nil})
-      test_list.save()
+    it('allows a user to add a client to a stylist') do
+      test_stylist = Stylist.new({:name => 'School stuff', :id => nil})
+      test_stylist.save()
       visit("/add")
-      fill_in("Description of the task", {:with => "Learn SQL"})
-      click_button("Add task")
+      fill_in("Name of the client", {:with => "Learn SQL"})
+      click_button("Add client")
       expect(page).to have_content("Success!")
     end
   end

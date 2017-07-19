@@ -1,66 +1,66 @@
 require('sinatra')
   require('sinatra/reloader')
-  require('./lib/task')
-  require('./lib/list')
+  require('./lib/client')
+  require('./lib/stylist')
   also_reload('lib/**/*.rb')
   require("pg")
 
-  DB = PG.connect({:dbname => "to_do"})
+  DB = PG.connect({:dbname => "hair_salons"})
 
   get("/") do
     erb(:index)
   end
 
-  get("/lists/new") do
-    erb(:list_form)
+  get("/stylists/new") do
+    erb(:stylist_form)
   end
 
-  post("/lists") do
+  post("/stylists") do
     name = params.fetch("name")
-    list = List.new({:name => name, :id => nil})
-    list.save()
-    erb(:list_success)
+    stylist = Stylist.new({:name => name, :id => nil})
+    stylist.save()
+    erb(:stylist_success)
   end
 
-  get('/lists') do
-    @lists = List.all()
-    erb(:lists)
+  get("/stylists") do
+    @stylists = Stylist.all()
+    erb(:stylists)
   end
 
   get('/add') do
-    @lists = List.all()
+    @stylists = Stylist.all()
     erb(:description_form)
   end
 
-  get("/lists/:id") do
-    @list = List.find(params.fetch("id").to_i())
-    erb(:list)
+  get("/stylists/:id") do
+    @stylist = Stylist.find(params.fetch("id").to_i())
+    erb(:stylist)
   end
 
-  post("/tasks") do
-    description = params.fetch("description")
-    list_id = params.fetch("list_id").to_i()
-    @list = List.find(list_id)
-    @task = Task.new({:description => description, :list_id => list_id})
-    @task.save()
-    erb(:task_success)
-  end
-
-  get("/lists/:id/edit") do
-    @list = List.find(params.fetch("id").to_i())
-    erb(:list_edit)
-  end
-
-  patch("/lists/:id") do
+  post("/clients") do
     name = params.fetch("name")
-    @list = List.find(params.fetch("id").to_i())
-    @list.update({:name => name})
-    erb(:list_success)
+    stylist_id = params.fetch("stylist_id").to_i()
+    @stylist = Stylist.find(stylist_id)
+    @client = Client.new({:name => name, :stylist_id => stylist_id})
+    @client.save()
+    erb(:client_success)
   end
 
-  delete("/lists/:id") do
-    @list = List.find(params.fetch("id").to_i())
-    @list.delete()
-    @lists = List.all()
-    erb(:list_success)
+  get("/stylists/:id/edit") do
+    @stylist = Stylist.find(params.fetch("id").to_i())
+    erb(:stylist_edit)
+  end
+
+  patch("/stylists/:id") do
+    name = params.fetch("name")
+    @stylist = Stylist.find(params.fetch("id").to_i())
+    @stylist.update({:name => name})
+    erb(:stylist_success)
+  end
+
+  delete("/stylists/:id") do
+    @stylist = Stylist.find(params.fetch("id").to_i())
+    @stylist.delete()
+    @stylists = Stylist.all()
+    erb(:stylist_success)
   end
