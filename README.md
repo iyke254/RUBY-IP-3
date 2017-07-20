@@ -13,7 +13,7 @@ Create a database hair_salon
 
 ### Deployment
 
-The app is deployed using heroku https://github.com/iyke254/RUBY-IP-3
+The app is deployed using heroku https://cryptic-temple-68106.herokuapp.com
 
 ### Authors
 
